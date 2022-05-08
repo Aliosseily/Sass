@@ -1,0 +1,29 @@
+@use "sass:math";
+// nesting styles
+.card {
+  display: block;
+  padding: $base-padding;
+  border: $base-border-thickness solid #ddd;
+  box-shadow: $base-box-shadow;
+  // border-radius:$base-border-radius / 4; if you want to devide you should use sass math methods
+  border-radius: math.div($base-border-radius, 4);
+
+  .card-title {
+    font-size: $font-size-lg;
+    padding-bottom: $base-padding;
+    font-weight: bold;
+  }
+  .card-body {
+    font-size: $base-font-size;
+    // nesting inside nesting
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+// debug to log the values
+// usefull for calculation
+@debug "hello world";
+@debug math.div(10, 3);
+@debug math.floor(2.6);
+@debug math.max(1px, 20px, 15px, 12px);

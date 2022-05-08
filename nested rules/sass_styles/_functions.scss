@@ -1,0 +1,15 @@
+// function are kind of mixins but they are very different as well.
+// mixins will give us a load of different properties or group them together and also taking
+// arguments for those properties.
+// A function instead will return a single value, it might take in an argument, it might do
+// some manipulation with that and at the end it returns a single value which we can sometimes
+// use for properties.
+
+// used in _button.scss file
+@function light-comp($color) {
+  //$complement is a variable
+  //complement is a built-in function in sass help us to get the complementary color for whatever we pass
+  $complement: complement($color);
+  $light-complement: lighten($complement, 30%);
+  @return $light-complement;
+}

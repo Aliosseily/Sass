@@ -1,0 +1,43 @@
+// mixins are a way for us to group together a bunch of css properties and values
+// so that it can be included and reused in many different css rules and selectors
+
+// set default value of $bg-color if we donot pass a value it willl takes the default one
+@mixin btn($bg-color: #e2e2e2) {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  border: 0;
+  padding: $base-padding $base-padding * 2;
+  border-radius: $base-border-radius;
+  background-color: $bg-color; // dynamic $bg-color value
+}
+
+// generic button
+.btn {
+  @include btn;
+}
+
+@each $key, $val in $colors {
+  .btn-#{$key} {
+    @include btn($val); // include the mixin and pass $val as parameter
+    &:hover {
+      //lighten is a built-in sass function that take a color and lighten it by specific percent
+      background-color: lighten($val, 5);
+    }
+  }
+  .btn-outlined-#{$key} {
+    @include btn(#fff);
+    border: $base-border-thickness solid $val;
+    &:hover {
+      background-color: $val;
+    }
+  }
+  .btn-complement-#{$key} {
+    @include btn($val);
+    color: light-comp($val); // created function in _functions.scss file
+    &:hover {
+      color: $val;
+      background-color: light-comp($val);
+    }
+  }
+}

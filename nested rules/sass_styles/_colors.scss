@@ -1,0 +1,59 @@
+@each $key, $val in $colors {
+  .text-#{$key} {
+    color: $val;
+  }
+  .text-hover-#{$key} {
+    &:hover {
+      color: $val;
+    }
+  }
+  .bg-#{$key} {
+    background-color: $val;
+  }
+  @if ($val != black and $val != white) {
+    // light variations
+    @for $i from 1 through 9 {
+      .text-#{$key}-light-#{$i} {
+        // mix two colors and how much we want to mix it in some kind of percent (10, 20 ...)
+        color: mix(white, $val, $i * 10);
+      }
+      // text-hover-orange-light-1
+      .text-hover-#{$key}-light-#{$i} {
+        &:hover {
+          color: mix(white, $val, $i * 10);
+        }
+      }
+      .bg-#{$key}-light-#{$i} {
+        background-color: mix(white, $val, $i * 10);
+      }
+    }
+
+    // dark variations
+    @for $i from 1 through 9 {
+      .text-#{$key}-dark-#{$i} {
+        color: mix(black, $val, $i * 10);
+      }
+      .text-hover-#{$key}-dark-#{$i} {
+        &:hover {
+          color: mix(black, $val, $i * 10);
+        }
+      }
+      .bg-#{$key}-dark-#{$i} {
+        background-color: mix(black, $val, $i * 10);
+      }
+    }
+  }
+}
+//.test{
+// &:nth-child{} &:active{} &:visited{} &:last-child ...
+//}
+
+@if (5>7) {
+  .test-if {
+    background-color: black;
+  }
+} @else {
+  .test-if-2 {
+    background-color: white;
+  }
+}

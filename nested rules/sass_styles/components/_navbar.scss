@@ -1,0 +1,34 @@
+//@extend used to inherit properties form class
+
+// we don't pass parmeters when we use extend in mixins we can pass
+// in css => with extend we will have .flex-layout, .navbar {properties}
+// in css => with mixins we will have .flex-layout{properties} .navbar {properties}
+
+// we do not use .flex-layout class in our html, and sass generates .flex-layout style inside css file which we don not need
+// replace .flex-layout with %flex-layout so that .flex-layout will not be compiled to css
+%flex-layout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.navbar {
+  @extend %flex-layout;
+  padding: $base-padding $base-padding * 2;
+  box-shadow: $base-box-shadow;
+  .site-title {
+    font-size: $font-size-lg;
+  }
+  .container {
+    @extend %flex-layout;
+  }
+}
+
+@each $key, $val in $colors {
+  .navbar-#{$key} {
+    @extend .navbar;
+    background-color: $val;
+  }
+}
